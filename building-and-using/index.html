@@ -13,19 +13,19 @@
         <meta name="author" content="Daniel Vrátil">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
     
     
       
-        <title>Using QCoro - QCoro</title>
+        <title>Building and Using QCoro - QCoro</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.802231af.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
         
       
     
@@ -64,7 +64,7 @@
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
   
     
-    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -72,7 +72,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#using-qcoro" class="md-skip">
+        <a href="#building-and-using-qcoro" class="md-skip">
           Skip to content
         </a>
       
@@ -83,7 +83,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="QCoro" class="md-header__button md-logo" aria-label="QCoro" data-md-component="logo">
+    <a href=".." title="QCoro" class="md-header__button md-logo" aria-label="QCoro" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Using QCoro
+              Building and Using QCoro
             
           </span>
         </div>
@@ -180,7 +180,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="QCoro" class="md-nav__button md-logo" aria-label="QCoro" data-md-component="logo">
+    <a href=".." title="QCoro" class="md-nav__button md-logo" aria-label="QCoro" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -212,7 +212,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href=".." class="md-nav__link">
         Home
       </a>
     </li>
@@ -225,11 +225,58 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../building-and-using/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Building and Using QCoro
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Building and Using QCoro
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#building-qcoro" class="md-nav__link">
+    Building QCoro
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-it-to-your-cmake" class="md-nav__link">
+    Add it to your CMake
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -263,7 +310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../coroutines/qt-vs-coawait/" class="md-nav__link">
+      <a href="../coroutines/qt-vs-coawait/" class="md-nav__link">
         Qt vs. co_await
       </a>
     </li>
@@ -275,7 +322,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../coroutines/coawait/" class="md-nav__link">
+      <a href="../coroutines/coawait/" class="md-nav__link">
         co_await Explained
       </a>
     </li>
@@ -287,7 +334,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../coroutines/reading/" class="md-nav__link">
+      <a href="../coroutines/reading/" class="md-nav__link">
         Further Reading
       </a>
     </li>
@@ -329,7 +376,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../task/" class="md-nav__link">
+      <a href="../reference/task/" class="md-nav__link">
         QCoro::Task<T>
       </a>
     </li>
@@ -341,7 +388,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../coro/" class="md-nav__link">
+      <a href="../reference/coro/" class="md-nav__link">
         QCoro::coro()
       </a>
     </li>
@@ -374,7 +421,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../qabstractsocket/" class="md-nav__link">
+      <a href="../reference/qabstractsocket/" class="md-nav__link">
         QAbstractSocket
       </a>
     </li>
@@ -386,7 +433,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../qdbuspendingcall/" class="md-nav__link">
+      <a href="../reference/qdbuspendingcall/" class="md-nav__link">
         QDBusPendingCall
       </a>
     </li>
@@ -398,7 +445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../qfuture/" class="md-nav__link">
+      <a href="../reference/qfuture/" class="md-nav__link">
         QFuture
       </a>
     </li>
@@ -410,7 +457,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../qiodevice/" class="md-nav__link">
+      <a href="../reference/qiodevice/" class="md-nav__link">
         QIODevice
       </a>
     </li>
@@ -422,7 +469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../qlocalsocket/" class="md-nav__link">
+      <a href="../reference/qlocalsocket/" class="md-nav__link">
         QLocalSocket
       </a>
     </li>
@@ -434,7 +481,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../qnetworkreply/" class="md-nav__link">
+      <a href="../reference/qnetworkreply/" class="md-nav__link">
         QNetworkReply
       </a>
     </li>
@@ -446,7 +493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../qprocess/" class="md-nav__link">
+      <a href="../reference/qprocess/" class="md-nav__link">
         QProcess
       </a>
     </li>
@@ -458,7 +505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../qtimer/" class="md-nav__link">
+      <a href="../reference/qtimer/" class="md-nav__link">
         QTimer
       </a>
     </li>
@@ -470,7 +517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../qtcpserver/" class="md-nav__link">
+      <a href="../reference/qtcpserver/" class="md-nav__link">
         QTcpServer
       </a>
     </li>
@@ -518,7 +565,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../about/license/" class="md-nav__link">
+      <a href="../about/license/" class="md-nav__link">
         License
       </a>
     </li>
@@ -550,6 +597,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#building-qcoro" class="md-nav__link">
+    Building QCoro
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-it-to-your-cmake" class="md-nav__link">
+    Add it to your CMake
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -561,17 +630,35 @@
               
                 
                 
-                <h1 id="using-qcoro">Using QCoro</h1>
-<p>Using QCoro is super-easy. All you need to do is include a header that provides
-coroutine support for a type that you want to use with your coroutine and that's
-it.</p>
-<p>There's one extra thing that you have to do: once you use the <code>co_await</code> keyword
-in your function, the function facticaly becomes a coroutine. And coroutines
-must have a special return type. The type is sort of a promise type (not to confuse
-with <code>std::promise</code>) that is returned to the caller when the coroutine is suspended.</p>
-<p>QCoro provides implementation of this "special" type in <a href="../task/">QCoro::Task</a>. So
-in order to turn your function into a coroutine, you need to change the return type
-of your function from <code>T</code> to <code>QCoro::Task&lt;T&gt;</code>.</p>
+                <h1 id="building-and-using-qcoro">Building and Using QCoro</h1>
+<h2 id="building-qcoro">Building QCoro</h2>
+<p>QCoro uses CMake build system. You can pass following options to the <code>cmake</code> command when building
+QCoro to customize the build:</p>
+<ul>
+<li><code>-DQCORO_BUILD_EXAMPLES</code> - whether to build examples or not (<code>ON</code> by default).</li>
+<li><code>-DQCORO_ENABLE_ASAN</code> - whether to build QCoro with AddressSanitizer (<code>OFF</code> by default).</li>
+<li><code>-DBUILD_SHARED_LIBS</code> - whether to build QCoro as a shared library (<code>OFF</code> by default).</li>
+<li><code>-DBUILD_TESTING</code> - whether to build tests (<code>ON</code> by default).</li>
+<li><code>-DUSE_QT_VERSION</code> - set to <code>5</code> or <code>6</code> to force a particular version of Qt. When not set the highest available version is used.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>mkdir build
+cd build
+cmake .. &lt;CMAKE FLAGS&gt;
+make
+# This will install QCoro into /usr/local/ prefix, change it by passing -DCMAKE_INSTALL_PREFIX=/usr
+# to the cmake command above.
+sudo make install
+</code></pre></div>
+<h2 id="add-it-to-your-cmake">Add it to your CMake</h2>
+<div class="highlight"><pre><span></span><code><span class="nb">find_package</span><span class="p">(</span><span class="s">QCoro</span> <span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="c"># Set necessary compiler flags to enable coroutine support</span>
+<span class="nb">qcoro_enable_coroutines</span><span class="p">()</span>
+
+<span class="err">...</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">your-target</span> <span class="s">QCoro::QCoro</span><span class="p">)</span>
+</code></pre></div>
                 
               
               
@@ -587,6 +674,41 @@ of your function from <code>T</code> to <code>QCoro::Task&lt;T&gt;</code>.</p>
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Home
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../coroutines/qt-vs-coawait/" class="md-footer__link md-footer__link--next" aria-label="Next: Qt vs. co_await" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Qt vs. co_await
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -633,10 +755,10 @@ of your function from <code>T</code> to <code>QCoro::Task&lt;T&gt;</code>.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
+      <script src="../assets/javascripts/bundle.756773cc.min.js"></script>
       
     
   </body>

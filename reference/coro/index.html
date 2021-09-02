@@ -14,7 +14,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.4">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
     
     
       
@@ -22,10 +22,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.bde7dde4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.802231af.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ef6f36e2.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
         
       
     
@@ -119,14 +119,18 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
       </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -223,8 +227,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../../install/" class="md-nav__link">
-        Installation
+      <a href="../../building-and-using/" class="md-nav__link">
+        Building and Using QCoro
       </a>
     </li>
   
@@ -630,26 +634,26 @@
                 
                 <h1 id="qcoro">qCoro()</h1>
 <h2 id="wrapping-qt-signals">Wrapping Qt Signals</h2>
-<div class="highlight"><pre><span></span><code><span class="n">Awaitable</span> <span class="nf">qCoro</span><span class="p">(</span><span class="n">QObject</span> <span class="o">*</span><span class="p">,</span> <span class="n">QtSignalPtr</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="n">Awaitable</span><span class="w"> </span><span class="nf">qCoro</span><span class="p">(</span><span class="n">QObject</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"> </span><span class="n">QtSignalPtr</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
 <p>It is possible to <code>co_await</code> an emission of a Qt signal. Signal arguments are returned
 as a result of the <code>co_await</code> expression:</p>
-<div class="highlight"><pre><span></span><code><span class="n">MyDialog</span> <span class="n">dialog</span><span class="p">;</span>
-<span class="p">...</span>
-<span class="k">const</span> <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="k">co_await</span> <span class="n">qCoro</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dialog</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QDialog</span><span class="o">::</span><span class="n">finished</span><span class="p">);</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">==</span> <span class="n">QDialog</span><span class="o">::</span><span class="n">Accepted</span><span class="p">)</span> <span class="p">{</span>
-    <span class="p">...</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><span class="n">MyDialog</span><span class="w"> </span><span class="n">dialog</span><span class="p">;</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">co_await</span><span class="w"> </span><span class="n">qCoro</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dialog</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">QDialog</span><span class="o">::</span><span class="n">finished</span><span class="p">);</span><span class="w"></span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">result</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">QDialog</span><span class="o">::</span><span class="n">Accepted</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">...</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
 </code></pre></div>
 <p>If the signal has more than one argument, they are returned as a tuple:</p>
-<div class="highlight"><pre><span></span><code><span class="n">QProcess</span> <span class="n">process</span><span class="p">;</span>
-<span class="p">...</span>
-<span class="k">const</span> <span class="k">auto</span> <span class="p">[</span><span class="n">exitCode</span><span class="p">,</span> <span class="n">exitStatus</span><span class="p">]</span> <span class="o">=</span> <span class="k">co_await</span> <span class="n">qCoro</span><span class="p">(</span><span class="o">&amp;</span><span class="n">process</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">QProcess</span><span class="o">::</span><span class="n">finished</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="n">QProcess</span><span class="w"> </span><span class="n">process</span><span class="p">;</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">exitCode</span><span class="p">,</span><span class="w"> </span><span class="n">exitStatus</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">co_await</span><span class="w"> </span><span class="n">qCoro</span><span class="p">(</span><span class="o">&amp;</span><span class="n">process</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">QProcess</span><span class="o">::</span><span class="n">finished</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
 <p>If the signal has no arguments, then the result of the <code>co_await</code> expression is <code>void</code>.</p>
 <h2 id="wrapping-qt-types">Wrapping Qt Types</h2>
-<div class="highlight"><pre><span></span><code><span class="n">QCoroType</span> <span class="nf">qCoro</span><span class="p">(</span><span class="n">QtClass</span> <span class="o">*</span><span class="p">);</span>
-<span class="n">QCoroType</span> <span class="nf">qCoro</span><span class="p">(</span><span class="n">QtClass</span> <span class="o">&amp;</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><span class="n">QCoroType</span><span class="w"> </span><span class="nf">qCoro</span><span class="p">(</span><span class="n">QtClass</span><span class="w"> </span><span class="o">*</span><span class="p">);</span><span class="w"></span>
+<span class="n">QCoroType</span><span class="w"> </span><span class="nf">qCoro</span><span class="p">(</span><span class="n">QtClass</span><span class="w"> </span><span class="o">&amp;</span><span class="p">);</span><span class="w"></span>
 </code></pre></div>
 <p>This function is overloaded for all Qt types supported by this library. It accepts either
 a pointer or a reference to a Qt type, and returns a QCoro type that wraps the Qt type and
@@ -657,9 +661,9 @@ provides coroutine-friendly API for the type.</p>
 <p>Some objects have only a single asynchronous event, so it makes sense to make them
 directly <code>co_await</code>able. An example is <code>QTimer</code>, where only one think can be <code>co_await</code>ed -
 the timer timeout. Thus with QCoro, it's possible to simply do this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">QTimer</span> <span class="n">timer</span><span class="p">;</span>
-<span class="p">...</span>
-<span class="k">co_await</span> <span class="n">timer</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">QTimer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
+<span class="k">co_await</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span><span class="w"></span>
 </code></pre></div>
 <p>However, some Qt classes have multiple asynchronous operations that the user may want to <code>co_await</code>.
 For such types, simply <code>co_await</code>ing the class instance doesn't make sense since it's not clear
@@ -668,16 +672,16 @@ which returns a wrapper that provides coroutine-friendly versions of the asynchr
 for the given type.</p>
 <p>Let's take QProcess as an example: one may want to <code>co_await</code> for the program to start or finish.
 Therefor, the type must be wrapped into <code>qCoro()</code> like this:</p>
-<div class="highlight"><pre><span></span><code><span class="n">QProcess</span> <span class="n">process</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><code><span class="n">QProcess</span><span class="w"> </span><span class="n">process</span><span class="p">;</span><span class="w"></span>
 <span class="c1">// Wait for the process to be started</span>
-<span class="k">co_await</span> <span class="n">qCoro</span><span class="p">(</span><span class="n">process</span><span class="p">).</span><span class="n">start</span><span class="p">(...);</span>
+<span class="k">co_await</span><span class="w"> </span><span class="n">qCoro</span><span class="p">(</span><span class="n">process</span><span class="p">).</span><span class="n">start</span><span class="p">(...);</span><span class="w"></span>
 <span class="c1">// The process is running now</span>
-<span class="p">...</span>
-<span class="p">...</span>
+<span class="p">...</span><span class="w"></span>
+<span class="p">...</span><span class="w"></span>
 <span class="c1">// Wait for it to finish</span>
-<span class="k">co_await</span> <span class="n">qCoro</span><span class="p">(</span><span class="n">process</span><span class="p">).</span><span class="n">finished</span><span class="p">();</span>
+<span class="k">co_await</span><span class="w"> </span><span class="n">qCoro</span><span class="p">(</span><span class="n">process</span><span class="p">).</span><span class="n">finished</span><span class="p">();</span><span class="w"></span>
 <span class="c1">// The process is no longer running</span>
-<span class="p">...</span>
+<span class="p">...</span><span class="w"></span>
 </code></pre></div>
 <p><code>qCoro()</code> is simply overloaded for all the Qt types currently supported by the QCoro library.
 The function returns a wrapper object (e.g. <code>QCoro::detail::QProcessWrapper</code>) which copies the
@@ -705,7 +709,8 @@ it's mentioned in the previous paragraph simply to explain how the wrapper works
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../task/" class="md-footer__link md-footer__link--prev" rel="prev">
+        
+        <a href="../task/" class="md-footer__link md-footer__link--prev" aria-label="Previous: QCoro::Task&lt;T&gt;" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -720,7 +725,8 @@ it's mentioned in the previous paragraph simply to explain how the wrapper works
         </a>
       
       
-        <a href="../qabstractsocket/" class="md-footer__link md-footer__link--next" rel="next">
+        
+        <a href="../qabstractsocket/" class="md-footer__link md-footer__link--next" aria-label="Next: QAbstractSocket" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
@@ -781,10 +787,10 @@ it's mentioned in the previous paragraph simply to explain how the wrapper works
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../assets/javascripts/workers/search.4fa0e4ee.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.1d3bfcf1.min.js"></script>
+      <script src="../../assets/javascripts/bundle.756773cc.min.js"></script>
       
     
   </body>
