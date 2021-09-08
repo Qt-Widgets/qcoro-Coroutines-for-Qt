@@ -40,6 +40,8 @@
     
     
     
+      <link rel="stylesheet" href="../../stylesheets/doctable.css">
+    
     <!-- Matomo -->
   <script type="text/javascript">
     var _paq = window._paq = window._paq || [];
@@ -402,6 +404,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../qdbuspendingreply/" class="md-nav__link">
+        QDBusPendingReply
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../qfuture/" class="md-nav__link">
         QFuture
       </a>
@@ -561,18 +575,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" data-md-state="indeterminate" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" data-md-state="indeterminate" type="checkbox" id="__nav_6" checked>
       
-      <label class="md-nav__link" for="__nav_5">
+      <label class="md-nav__link" for="__nav_6">
         About
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="About" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           About
         </label>
@@ -663,6 +692,13 @@
                 
                 
                 <h1 id="qiodevice">QIODevice</h1>
+<div class="doctable"><table><tr><th>Module</th><td>QCoroCore</td></tr><tr><th>Include</th><td>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;QCoroIODevice&gt;</span><span class="cp"></span>
+</code></pre></div>
+</td></tr><tr><th>CMake</th><td>
+<div class="highlight"><pre><span></span><code><span class="n">target_link_libraries</span><span class="p">(</span><span class="n">myapp</span><span class="w"> </span><span class="n">QCoro</span><span class="o">::</span><span class="n">QCoroCore</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+</td></tr><tr><th>Inherited&nbsp;By</th><td><a href="../qabstractsocket">QCoroAbstractSocket</a>, <a href="../qlocalsocket">QCoroLocalSocket</a>, <a href="../qnetworkreply">QCoroNetworkReply</a>, <a href="../qprocess">QCoroProcess</a></td></tr></table></div>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">QCoroIODevice</span><span class="w"></span>
 </code></pre></div>
 <p><a href="https://doc.qt.io/qt-5/qiodevice.html"><code>QIODevice</code></a> has several different IO operations that can be waited on
@@ -683,6 +719,13 @@ Qt types.</p>
 emits <a href="https://doc.qt.io/qt-5/qiodevice.html#readyRead"><code>QIODevice::readyRead()</code></a> signal) and then returns all data
 available in the buffer as a <code>QByteArray</code>. Doesn't suspend the coroutine if there are already
 data available in the <code>QIODevice</code> or if the <code>QIODevice</code> is not opened for reading.</p>
+<p>This is the default operation when <code>co_await</code>ing an instance of a <code>QIODevice</code> directly. Thus,
+it is possible to just do</p>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="n">QByteArray</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">co_await</span><span class="w"> </span><span class="n">device</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<p>instead of</p>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="n">QByteArray</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">qCoro</span><span class="p">(</span><span class="n">device</span><span class="p">).</span><span class="n">readAll</span><span class="p">();</span><span class="w"></span>
+</code></pre></div>
 <p>See documentation for <a href="https://doc.qt.io/qt-5/qiodevice.html#readAll"><code>QIODevice::readAll()</code></a> for details.</p>
 <div class="highlight"><pre><span></span><code><span class="n">Awaitable</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">QCoroIODevice</span><span class="o">::</span><span class="n">readAll</span><span class="p">();</span><span class="w"></span>
 </code></pre></div>

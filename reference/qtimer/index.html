@@ -40,6 +40,8 @@
     
     
     
+      <link rel="stylesheet" href="../../stylesheets/doctable.css">
+    
     <!-- Matomo -->
   <script type="text/javascript">
     var _paq = window._paq = window._paq || [];
@@ -402,6 +404,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../qdbuspendingreply/" class="md-nav__link">
+        QDBusPendingReply
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../qfuture/" class="md-nav__link">
         QFuture
       </a>
@@ -510,18 +524,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" data-md-state="indeterminate" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" data-md-state="indeterminate" type="checkbox" id="__nav_6" checked>
       
-      <label class="md-nav__link" for="__nav_5">
+      <label class="md-nav__link" for="__nav_6">
         About
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="About" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           About
         </label>
@@ -576,6 +605,14 @@
                 
                 
                 <h1 id="qtimer">QTimer</h1>
+<div class="doctable"><table><tr><th>Module</th><td>QCoroCore</td></tr><tr><th>Include</th><td>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;QCoroTimer&gt;</span><span class="cp"></span>
+</code></pre></div>
+</td></tr><tr><th>CMake</th><td>
+<div class="highlight"><pre><span></span><code><span class="n">target_link_libraries</span><span class="p">(</span><span class="n">myapp</span><span class="w"> </span><span class="n">QCoro</span><span class="o">::</span><span class="n">QCoroCore</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+</td></tr></table></div>
+
 <div class="highlight"><pre><span></span><code><span class="n">QTimer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span><span class="w"></span>
 <span class="n">timer</span><span class="p">.</span><span class="n">start</span><span class="p">(</span><span class="mi">1</span><span class="n">s</span><span class="p">);</span><span class="w"></span>
 <span class="k">co_await</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span><span class="w"></span>
@@ -585,8 +622,8 @@ co-awaiting coroutine is suspended, until the timer finishes, that is until
 <a href="https://doc.qt.io/qt-5/qtimer.html#timeout"><code>QTimer::timeout()</code></a> signal is emitted.</p>
 <p>The timer must be active. If the timer is not active (not started yet or already
 finished) the <code>co_await</code> expression will return immediately.</p>
-<p>To make it work, include <code>qcoro/timer.h</code> in your implementation.</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;qcoro/timer.h&gt;</span><span class="cp"></span>
+<p>To make it work, include <code>QCoroTimer</code> in your implementation.</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;QCoroTimer&gt;</span><span class="cp"></span>
 <span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;chrono&gt;</span><span class="cp"></span>
 
 <span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">std</span><span class="o">::</span><span class="nn">chrono_literals</span><span class="p">;</span><span class="w"></span>

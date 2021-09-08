@@ -40,6 +40,8 @@
     
     
     
+      <link rel="stylesheet" href="../../stylesheets/doctable.css">
+    
     <!-- Matomo -->
   <script type="text/javascript">
     var _paq = window._paq = window._paq || [];
@@ -399,10 +401,59 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          QDBusPendingCall
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         QDBusPendingCall
       </a>
       
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#waitforfinished" class="md-nav__link">
+    waitForFinished()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qdbuspendingreply/" class="md-nav__link">
+        QDBusPendingReply
+      </a>
     </li>
   
 
@@ -510,18 +561,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" data-md-state="indeterminate" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" data-md-state="indeterminate" type="checkbox" id="__nav_6" checked>
       
-      <label class="md-nav__link" for="__nav_5">
+      <label class="md-nav__link" for="__nav_6">
         About
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="About" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           About
         </label>
@@ -564,6 +630,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#waitforfinished" class="md-nav__link">
+    waitForFinished()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -576,14 +664,72 @@
                 
                 
                 <h1 id="qdbuspendingcall">QDBusPendingCall</h1>
-<div class="highlight"><pre><span></span><code>QDBusPendingCall callReturningQString = ...
-const QDBusReply&lt;QString&gt; reply = co_await callReturningQString;
+<div class="doctable"><table><tr><th>Module</th><td>QCoroDBus</td></tr><tr><th>Include</th><td>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;QCoroDBusPendingCall&gt;</span><span class="cp"></span>
 </code></pre></div>
-<p>The QCoro frameworks allows <code>co_await</code>ing on <a href="https://doc.qt.io/qt-5/qdbuspendingcall.html">QDBusPendingCall</a> objects,
-which represent an asynchronous D-Bus call. The co-awaiting coroutine is suspended until the
-D-Bus call finishes. If the call has already finished, to coroutine will not be suspended.</p>
-<p>To make it work, include <code>qcoro/dbus.h</code> in your implementation.</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;qcoro/dbus.h&gt;</span><span class="cp"></span>
+</td></tr><tr><th>CMake</th><td>
+<div class="highlight"><pre><span></span><code><span class="n">target_link_libraries</span><span class="p">(</span><span class="n">myapp</span><span class="w"> </span><span class="n">QCoro</span><span class="o">::</span><span class="n">QCoroDBus</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+</td></tr></table></div>
+
+<p><a href="https://doc.qt.io/qt-5/qdbuspendingcall.html"><code>QDBusPendingCall</code></a> on its own doesn't have any operation that could
+be awaited asynchronously, this is usually done through a helper class called
+<a href="https://doc.qt.io/qt-5/qdbuspendingcallwatcher.html"><code>QDBusPendingCallWatcher</code></a>. To simplify the API, QCoro allows to
+directly <code>co_await</code> completion of the pending call or use a wrapper class <code>QCoroDBusPendingCall</code>.
+To wrap a <code>QDBusPendingCall</code> into a <code>QCoroDBusPendingCall</code>, use <a href="../coro/"><code>qCoro()</code></a>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">QCoroDBusPendingCall</span><span class="w"> </span><span class="nf">qCoro</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QDBusPendingCall</span><span class="w"> </span><span class="o">&amp;</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>To await completion of the pending call without the <code>qCoro</code> wrapper, just use the pending call
+in a <code>co_await</code> expression. The behavior is identical to awaiting on result of
+<code>QCoroDBusPendingCall::waitForFinished()</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">QDBusPendingCall</span><span class="w"> </span><span class="n">call</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interface</span><span class="p">.</span><span class="n">asyncCall</span><span class="p">(...);</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="n">QDBusReply</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">co_await</span><span class="w"> </span><span class="n">pendigCall</span><span class="p">;</span><span class="w"></span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title"><code>QDBusPendingCall</code> vs. <code>QDBusPendingReply</code></p>
+<p>As the Qt documentation for <a href="https://doc.qt.io/qt-5/qdbuspendingcall.html"><code>QDBusPendingCall</code></a> says, you are more likely to use
+<a href="https://doc.qt.io/qt-5/qdbuspendingreply.html"><code>QDBusPendingReply</code></a> in application code than <code>QDBusPendingCall</code>. QCoro has explicit
+support for <code>QDBusPendingCall</code> to allow using functions that return <code>QDBusPendingCall</code> directly in <code>co_await</code>
+expressions without the programmer having to first convert it to <code>QDBusPendingReply</code>. <code>QDBusPendingReply</code> can
+be constructed from a <code>QDBusMessage</code>, which is a result of awaiting <code>QDBusPendingCall</code>, therefore it's possible
+to perform both the conversion and awaiting in a single line of code:
+<div class="highlight"><pre><span></span><code><span class="n">QDBusPendingReply</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">co_await</span><span class="w"> </span><span class="n">iface</span><span class="p">.</span><span class="n">asyncCall</span><span class="p">(...);</span><span class="w"></span>
+</code></pre></div>
+Note that <a href="https://doc.qt.io/qt-5/qdbusabstractinterface.html#asyncCall-1"><code>QDBusAbstractInterface::asyncCall</code></a> returns
+a <code>QDBusPendingCall</code>.</p>
+</div>
+<h2 id="waitforfinished"><code>waitForFinished()</code></h2>
+<!-- BEGIN INCLUDE ../../qcoro/dbus/qcorodbuspendingcall.h &lt;!-- doc-waitForFinished-start --&gt; &lt;!-- doc-waitForFinished-end --&gt; -->
+
+<p>Waits until the DBus call is finished. This is equivalent to using
+<a href="https://doc.qt.io/qt-5/qdbuspendingcallwatcher.html"><code>QDBusPendingCallWatcher</code></a> and waiting for it
+to emit the <a href="https://doc.qt.io/qt-5/qdbuspendingcallwatcher.html#finished"><code>finished()</code></a> signal.</p>
+<p>Returns a <code>QDBusMessage</code> representing the reply to the call.</p>
+<p>If the call is already finished or has an error, the coroutine will not suspend and the <code>co_await</code>
+expression will return immediatelly.</p>
+<p>It is also possible to just directly use a <code>QDBusPendingCall</code> in a <code>co_await</code>
+expression to await its completion:
+<div class="highlight"><pre><span></span><code><span class="n">QDBusPendingCall</span><span class="w"> </span><span class="n">pendingCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interface</span><span class="p">.</span><span class="n">asyncCall</span><span class="p">(...);</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">reply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">co_await</span><span class="w"> </span><span class="n">pendingCall</span><span class="p">;</span><span class="w"></span>
+</code></pre></div></p>
+<p>The above is equivalent to:
+<div class="highlight"><pre><span></span><code><span class="n">QDBusPendingCall</span><span class="w"> </span><span class="n">pendingCall</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interface</span><span class="p">.</span><span class="n">asyncCall</span><span class="p">(...);</span><span class="w"></span>
+<span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">reply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">co_await</span><span class="w"> </span><span class="n">qCoro</span><span class="p">(</span><span class="n">pendingCall</span><span class="p">).</span><span class="n">waitForFinished</span><span class="p">();</span><span class="w"></span>
+</code></pre></div></p>
+<p>This is a coroutine-friendly equivalent to using <a href="https://doc.qt.io/qt-5/qdbuspendingcallwatcher.html"><code>QDBusPendingCallWatcher</code></a>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">QDBusPendingCall</span><span class="w"> </span><span class="n">call</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interface</span><span class="p">.</span><span class="n">asyncCall</span><span class="p">(...);</span><span class="w"></span>
+<span class="n">QDBusPendingCallWatcher</span><span class="w"> </span><span class="o">*</span><span class="n">watcher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QDBusPendingCallWatcher</span><span class="p">(</span><span class="n">call</span><span class="p">);</span><span class="w"></span>
+<span class="n">QObject</span><span class="o">::</span><span class="n">connect</span><span class="p">(</span><span class="n">watcher</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">QDBusPendingCallWatcher</span><span class="o">::</span><span class="n">finished</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="p">[](</span><span class="n">QDBusPendingCallWatcher</span><span class="w"> </span><span class="o">*</span><span class="n">watcher</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                    </span><span class="n">watcher</span><span class="o">-&gt;</span><span class="n">deleteLater</span><span class="p">();</span><span class="w"></span>
+<span class="w">                    </span><span class="k">const</span><span class="w"> </span><span class="n">QDBusReply</span><span class="o">&lt;</span><span class="p">...</span><span class="o">&gt;</span><span class="w"> </span><span class="n">reply</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">watcher</span><span class="p">;</span><span class="w"></span>
+<span class="w">                    </span><span class="p">...</span><span class="w"></span>
+<span class="w">                </span><span class="p">});</span><span class="w"></span>
+</code></pre></div>
+<!-- END INCLUDE -->
+
+<h2 id="example">Example</h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;QCoroDBus&gt;</span><span class="cp"></span>
 
 <span class="n">QCoro</span><span class="o">::</span><span class="n">Task</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span><span class="w"> </span><span class="n">PlayerControl</span><span class="o">::</span><span class="n">nextSong</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// Create a regular QDBusInterface representing the Spotify MPRIS interface</span>
@@ -642,13 +788,13 @@ D-Bus call finishes. If the call has already finished, to coroutine will not be 
       
       
         
-        <a href="../qfuture/" class="md-footer__link md-footer__link--next" aria-label="Next: QFuture" rel="next">
+        <a href="../qdbuspendingreply/" class="md-footer__link md-footer__link--next" aria-label="Next: QDBusPendingReply" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              QFuture
+              QDBusPendingReply
             </div>
           </div>
           <div class="md-footer__button md-icon">

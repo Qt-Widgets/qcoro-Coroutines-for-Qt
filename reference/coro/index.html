@@ -40,6 +40,8 @@
     
     
     
+      <link rel="stylesheet" href="../../stylesheets/doctable.css">
+    
     <!-- Matomo -->
   <script type="text/javascript">
     var _paq = window._paq = window._paq || [];
@@ -447,6 +449,18 @@
   
   
     <li class="md-nav__item">
+      <a href="../qdbuspendingreply/" class="md-nav__link">
+        QDBusPendingReply
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../qfuture/" class="md-nav__link">
         QFuture
       </a>
@@ -545,18 +559,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" data-md-state="indeterminate" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" data-md-state="indeterminate" type="checkbox" id="__nav_6" checked>
       
-      <label class="md-nav__link" for="__nav_5">
+      <label class="md-nav__link" for="__nav_6">
         About
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="About" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           About
         </label>
@@ -659,7 +688,7 @@ as a result of the <code>co_await</code> expression:</p>
 a pointer or a reference to a Qt type, and returns a QCoro type that wraps the Qt type and
 provides coroutine-friendly API for the type.</p>
 <p>Some objects have only a single asynchronous event, so it makes sense to make them
-directly <code>co_await</code>able. An example is <code>QTimer</code>, where only one think can be <code>co_await</code>ed -
+directly <code>co_await</code>able. An example is <code>QTimer</code>, where only one thing can be <code>co_await</code>ed -
 the timer timeout. Thus with QCoro, it's possible to simply do this:</p>
 <div class="highlight"><pre><span></span><code><span class="n">QTimer</span><span class="w"> </span><span class="n">timer</span><span class="p">;</span><span class="w"></span>
 <span class="p">...</span><span class="w"></span>
@@ -671,7 +700,7 @@ what operation is being <code>co_await</code>ed. For those types, QCoro provides
 which returns a wrapper that provides coroutine-friendly versions of the asynchronous methods
 for the given type.</p>
 <p>Let's take QProcess as an example: one may want to <code>co_await</code> for the program to start or finish.
-Therefor, the type must be wrapped into <code>qCoro()</code> like this:</p>
+Therefore the type must be wrapped into <code>qCoro()</code> like this:</p>
 <div class="highlight"><pre><span></span><code><span class="n">QProcess</span><span class="w"> </span><span class="n">process</span><span class="p">;</span><span class="w"></span>
 <span class="c1">// Wait for the process to be started</span>
 <span class="k">co_await</span><span class="w"> </span><span class="n">qCoro</span><span class="p">(</span><span class="n">process</span><span class="p">).</span><span class="n">start</span><span class="p">(...);</span><span class="w"></span>
@@ -684,9 +713,9 @@ Therefor, the type must be wrapped into <code>qCoro()</code> like this:</p>
 <span class="p">...</span><span class="w"></span>
 </code></pre></div>
 <p><code>qCoro()</code> is simply overloaded for all the Qt types currently supported by the QCoro library.
-The function returns a wrapper object (e.g. <code>QCoro::detail::QProcessWrapper</code>) which copies the
+The function returns a wrapper object (e.g. <code>QCoro::detail::QCoroProcess</code>) which copies the
 QProcess API. It doesn't copy the entire API, only the bits that we want to make <code>co_await</code>able.
-When you call one of those metods (e.g. <code>QProcessWrapper::start()</code>), it returns an awaitable
+When you call one of those metods (e.g. <code>QCoroProcess::start()</code>), it returns an awaitable
 type that calls <code>QProcess::start()</code>, suspends the coroutine and resumes it again when the
 wrapped <code>QProcess</code> object emits the <code>started()</code> signal.</p>
 <p>Normally you don't need to concern yourself with anything inside the <code>QCoro::detail</code> namespace,

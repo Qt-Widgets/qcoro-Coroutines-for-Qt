@@ -40,6 +40,8 @@
     
     
     
+      <link rel="stylesheet" href="../../stylesheets/doctable.css">
+    
     <!-- Matomo -->
   <script type="text/javascript">
     var _paq = window._paq = window._paq || [];
@@ -400,6 +402,18 @@
             
   
   
+  
+    <li class="md-nav__item">
+      <a href="../qdbuspendingreply/" class="md-nav__link">
+        QDBusPendingReply
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
     
   
   
@@ -411,9 +425,46 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          QFuture
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         QFuture
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#waitforfinished" class="md-nav__link">
+    waitForFinished()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -510,18 +561,33 @@
   
   
   
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        Changelog
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
     
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" data-md-state="indeterminate" type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" data-md-state="indeterminate" type="checkbox" id="__nav_6" checked>
       
-      <label class="md-nav__link" for="__nav_5">
+      <label class="md-nav__link" for="__nav_6">
         About
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="About" data-md-level="1">
-        <label class="md-nav__title" for="__nav_5">
+        <label class="md-nav__title" for="__nav_6">
           <span class="md-nav__icon md-icon"></span>
           About
         </label>
@@ -564,6 +630,28 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#waitforfinished" class="md-nav__link">
+    waitForFinished()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -576,14 +664,47 @@
                 
                 
                 <h1 id="qfuture">QFuture</h1>
-<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="n">QString</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">co_await</span><span class="w"> </span><span class="n">QtConcurrent</span><span class="o">::</span><span class="n">run</span><span class="p">(</span><span class="n">taskReturningQString</span><span class="p">);</span><span class="w"></span>
+<div class="doctable"><table><tr><th>Module</th><td>QCoroCore</td></tr><tr><th>Include</th><td>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;QCoroFuture&gt;</span><span class="cp"></span>
 </code></pre></div>
-<p>The QCoro frameworks allows <code>co_await</code>ing on <a href="https://doc.qt.io/qt-5/qfuture.html">QFuture</a> objects,
-which represent an asynchronously executed call. The co-awaiting coroutine is suspended until
-the <code>QFuture</code> is finished. If the <code>QFuture</code> object is already finished, the coroutine
-will not be suspended.</p>
-<p>To be able to use <code>co_await</code> with <code>QFuture</code>, include <code>qcoro/future.h</code> in your implementation.</p>
-<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;qcoro/future.h&gt;</span><span class="cp"></span>
+</td></tr><tr><th>CMake</th><td>
+<div class="highlight"><pre><span></span><code><span class="n">target_link_libraries</span><span class="p">(</span><span class="n">myapp</span><span class="w"> </span><span class="n">QCoro</span><span class="o">::</span><span class="n">QCoroCore</span><span class="p">)</span><span class="w"></span>
+</code></pre></div>
+</td></tr></table></div>
+
+<p><a href="https://doc.qt.io/qt-5/qfuture.html"><code>QFuture</code></a>, which represents an asynchronously executed call, doesn't have any
+operation on its own that could be awaited asynchronously, this is usually done through a helper
+class called <a href="https://doc.qt.io/qt-5/qfuturewatcher.html"><code>QFutureWatcher</code></a>. To simplify the API, QCoro allows to directly
+<code>co_await</code> completion of the running <code>QFuture</code> or use a wrapper class <code>QCoroFuture</code>. To wrap
+a <code>QFuture</code> into a <code>QCoroFuture</code>, use <a href="../coro/"><code>qCoro()</code></a>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">QCoroFuture</span><span class="w"> </span><span class="n">qCoro</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">QFuture</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">future</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<h2 id="waitforfinished"><code>waitForFinished()</code></h2>
+<!-- BEGIN INCLUDE ../../qcoro/core/qcorofuture.h &lt;!-- doc-waitForFinished-start --&gt; &lt;!-- doc-waitForFinished-end --&gt; -->
+
+<p>Waits until the future is finished and then returns the result of the future (or nothing, if the future
+is a <code>QFuture&lt;void&gt;</code>.</p>
+<p>If the call is already finished or has an error, the coroutine will not suspend and the <code>co_await</code>
+expression will return immediatelly.</p>
+<p>This is a coroutine-friendly equivalent to using <a href="https://doc.qt.io/qt-5/qfuturewatcher.html"><code>QFutureWatcher</code></a>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">QFuture</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span><span class="w"> </span><span class="n">future</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">QtConcurrent</span><span class="o">::</span><span class="n">run</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
+<span class="n">QFutureWatcher</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span><span class="w"> </span><span class="o">*</span><span class="n">watcher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">QFutureWatcher</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;</span><span class="p">();</span><span class="w"></span>
+<span class="n">QObject</span><span class="o">::</span><span class="n">connect</span><span class="p">(</span><span class="n">watcher</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">QFutureWatcher</span><span class="o">&lt;</span><span class="n">QString</span><span class="o">&gt;::</span><span class="n">finished</span><span class="p">,</span><span class="w"></span>
+<span class="w">                 </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">watcher</span><span class="p">]()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                     </span><span class="n">watcher</span><span class="o">-&gt;</span><span class="n">deleteLater</span><span class="p">();</span><span class="w"></span>
+<span class="w">                     </span><span class="k">const</span><span class="w"> </span><span class="n">QStrign</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">watcher</span><span class="o">-&gt;</span><span class="n">result</span><span class="p">();</span><span class="w"></span>
+<span class="w">                     </span><span class="p">...</span><span class="w"></span>
+<span class="w">                 </span><span class="p">});</span><span class="w"></span>
+</code></pre></div>
+<p>You can also await completion of the future without using <code>QCoroFuture</code> at all by directly co-awaiting the
+<code>QFuture</code> object:</p>
+<div class="highlight"><pre><span></span><code><span class="k">const</span><span class="w"> </span><span class="n">QString</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">co_await</span><span class="w"> </span><span class="n">QtConcurrent</span><span class="o">::</span><span class="n">run</span><span class="p">([]()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">});</span><span class="w"></span>
+</code></pre></div>
+<!-- END INCLUDE -->
+
+<h2 id="example">Example</h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;QCoroFuture&gt;</span><span class="cp"></span>
 
 <span class="n">QCoro</span><span class="o">::</span><span class="n">Task</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">runTask</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="c1">// Starts a concurrent task and co_awaits on the returned QFuture. While the task is</span>
@@ -620,7 +741,7 @@ will not be suspended.</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="../qdbuspendingcall/" class="md-footer__link md-footer__link--prev" aria-label="Previous: QDBusPendingCall" rel="prev">
+        <a href="../qdbuspendingreply/" class="md-footer__link md-footer__link--prev" aria-label="Previous: QDBusPendingReply" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -629,7 +750,7 @@ will not be suspended.</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              QDBusPendingCall
+              QDBusPendingReply
             </div>
           </div>
         </a>
