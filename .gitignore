@@ -1,1 +1,5 @@
 docs/overrides/main.html
+__pycache__
+venv
+build
+build-*
