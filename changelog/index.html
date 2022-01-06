@@ -893,6 +893,47 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#040-2022-01-06" class="md-nav__link">
+    0.4.0 (2022-01-06)
+  </a>
+  
+    <nav class="md-nav" aria-label="0.4.0 (2022-01-06)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#co-installability-of-qt5-and-qt6-builds-of-qcoro" class="md-nav__link">
+    Co-installability of Qt5 and Qt6 builds of QCoro
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complete-re-work-of-cmake-configuration" class="md-nav__link">
+    Complete re-work of CMake configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#support-for-compiling-qcoro-with-clang-against-libstdc" class="md-nav__link">
+    Support for compiling QCoro with Clang against libstdc++
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-changelog" class="md-nav__link">
+    Full changelog
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#030-2021-10-11" class="md-nav__link">
     0.3.0 (2021-10-11)
   </a>
@@ -1034,6 +1075,47 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#040-2022-01-06" class="md-nav__link">
+    0.4.0 (2022-01-06)
+  </a>
+  
+    <nav class="md-nav" aria-label="0.4.0 (2022-01-06)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#co-installability-of-qt5-and-qt6-builds-of-qcoro" class="md-nav__link">
+    Co-installability of Qt5 and Qt6 builds of QCoro
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#complete-re-work-of-cmake-configuration" class="md-nav__link">
+    Complete re-work of CMake configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#support-for-compiling-qcoro-with-clang-against-libstdc" class="md-nav__link">
+    Support for compiling QCoro with Clang against libstdc++
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#full-changelog" class="md-nav__link">
+    Full changelog
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#030-2021-10-11" class="md-nav__link">
     0.3.0 (2021-10-11)
   </a>
@@ -1102,6 +1184,54 @@
                 
 
 <h1 id="changelog">Changelog</h1>
+<h2 id="040-2022-01-06">0.4.0 (2022-01-06)</h2>
+<p>Major highlights in this release:</p>
+<ul>
+<li>Co-installability of Qt5 and Qt6 builds of QCoro</li>
+<li>Complete re-work of CMake configuration</li>
+<li>Support for compiling QCoro with Clang against libstdc++</li>
+</ul>
+<h3 id="co-installability-of-qt5-and-qt6-builds-of-qcoro">Co-installability of Qt5 and Qt6 builds of QCoro</h3>
+<p>This change mostly affects packagers of QCoro. It is now possible to install both Qt5 and Qt6 versions
+of QCoro alongside each other without conflicting files. The shared libraries now contain the Qt version
+number in their name (e.g. <code>libQCoro6Core.so</code>) and header files are also located in dedicated subdirectories
+(e.g. <code>/usr/include/qcoro6/{qcoro,QCoro}</code>). User of QCoro should not need to do any changes to their codebase.</p>
+<h3 id="complete-re-work-of-cmake-configuration">Complete re-work of CMake configuration</h3>
+<p>This change affects users of QCoro, as they will need to adjust CMakeLists.txt of their projects. First,
+depending on whether they want to use Qt5 or Qt6 version of QCoro, a different package must be used.
+Additionally, list of QCoro components to use must be specified:</p>
+<div class="highlight"><pre><span></span><code>find_package(QCoro5 REQUIRED COMPONENTS Core Network DBus)
+</code></pre></div>
+<p>Finally, the target names to use in <code>target_link_libraries</code> have changed as well:</p>
+<ul>
+<li><code>QCoro::Core</code></li>
+<li><code>QCoro::Network</code></li>
+<li><code>QCoro::DBus</code></li>
+</ul>
+<p>The version-less <code>QCoro</code> namespace can be used regardless of whether using Qt5 or Qt6 build of QCoro.
+<code>QCoro5</code> and <code>QCoro6</code> namespaces are available as well, in case users need to combine both Qt5 and Qt6
+versions in their codebase.</p>
+<p>This change brings QCoro CMake configuration system to the same style and behavior as Qt itself, so it
+should now be easier to use QCoro, especially when supporting both Qt5 and Qt6.</p>
+<h3 id="support-for-compiling-qcoro-with-clang-against-libstdc">Support for compiling QCoro with Clang against libstdc++</h3>
+<p>Until now, when the Clang compiler was detected, QCoro forced usage of LLVM's libc++ standard library.
+Coroutine support requires tight co-operation between the compiler and standard library. Because Clang
+still considers their coroutine support experimental it expects all coroutine-related types in standard
+library to be located in <code>std::experimental</code> namespace. In GNU's libstdc++, coroutines are fully supported
+and thus implemented in the <code>std</code> namespace. This requires a little bit of extra glue, which is now in place.</p>
+<h3 id="full-changelog">Full changelog</h3>
+<ul>
+<li>QCoro can now be built with Clang against libstdc++ (<a href="https://github.com/danvratil/qcoro/pull/38">#38</a>, <a href="https://github.com/danvratil/qcoro/issues/22">#22</a>)</li>
+<li>Qt5 and Qt6 builds of QCoro are now co-installable (<a href="https://github.com/danvratil/qcoro/issues/36">#36</a>, <a href="https://github.com/danvratil/qcoro/pull/37">#37</a>)</li>
+<li>Fixed early co_return not resuming the caller (<a href="https://github.com/danvratil/qcoro/issue/24">#24</a>, <a href="https://github.com/danvratil/qcoro/pull/35">#35</a>)</li>
+<li>Fixed QProcess example (<a href="https://github.com/danvratil/qcoro/pull/34">#34</a>)</li>
+<li>Test suite has been improved and extended (<a href="https://github.com/danvratil/qcoro/pull/29">#29</a>, <a href="https://github.com/danvratil/qcoro/pull/31">#31</a>)</li>
+<li>Task move assignment operator checks for self-assignment (<a href="https://github.com/danvratil/qcoro/pull/27">#27</a>)</li>
+<li>QCoro can now be built as a subdirectory inside another CMake project (<a href="https://github.com/danvratil/qcoro/pull/25">#25</a>)</li>
+<li>Fixed QCoroCore/qcorocore.h header (<a href="https://github.com/danvratil/qcoro/pull/23">#23</a>)</li>
+<li>DBus is disabled by default on Windows, Mac and Android (<a href="https://github.com/danvratil/qcoro/pull/21">#21</a>)</li>
+</ul>
+<p>Thanks to everyone who contributed to QCoro!</p>
 <h2 id="030-2021-10-11">0.3.0 (2021-10-11)</h2>
 <ul>
 <li>Added SOVERSION to shared libraries (<a href="https://github.com/danvratil/qcoro/pull/17">#17</a>)</li>
