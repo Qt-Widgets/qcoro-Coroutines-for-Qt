@@ -84,7 +84,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="." title="QCoro" class="md-header__button md-logo" aria-label="QCoro" data-md-component="logo">
       
@@ -162,13 +164,115 @@
     
   </nav>
   
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+    
+  
+
+
+  <li class="md-tabs__item">
+    <a href="." class="md-tabs__link md-tabs__link--active">
+      Home
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="building-and-using/" class="md-tabs__link">
+      Building and Using QCoro
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="coroutines/qt-vs-coawait/" class="md-tabs__link">
+        Coroutines
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="reference/coro/" class="md-tabs__link">
+        Reference
+      </a>
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+
+
+  <li class="md-tabs__item">
+    <a href="changelog/" class="md-tabs__link">
+      Changelog
+    </a>
+  </li>
+
+      
+        
+  
+  
+
+
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="about/license/" class="md-tabs__link">
+        About
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
-        
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -181,8 +285,10 @@
                   <div class="md-sidebar__inner">
                     
 
+  
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="." title="QCoro" class="md-nav__button md-logo" aria-label="QCoro" data-md-component="logo">
       
@@ -334,6 +440,14 @@
       
       
       
+        
+          
+        
+          
+        
+          
+        
+      
       
         <label class="md-nav__link" for="__nav_3">
           Coroutines
@@ -410,6 +524,16 @@
       
       
       
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
       
         <label class="md-nav__link" for="__nav_4">
           Reference
@@ -428,8 +552,52 @@
   
   
   
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_1" data-md-state="indeterminate" type="checkbox" id="__nav_4_1" checked>
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="reference/coro/">Coro</a>
+          
+            <label for="__nav_4_1">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Coro" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Coro
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
     <li class="md-nav__item">
-      <a href="reference/task/" class="md-nav__link">
+      <a href="reference/coro/task/" class="md-nav__link">
         QCoro::Task<T>
       </a>
     </li>
@@ -443,9 +611,127 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/coro/" class="md-nav__link">
+      <a href="reference/coro/coro/" class="md-nav__link">
         QCoro::coro()
       </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" data-md-state="indeterminate" type="checkbox" id="__nav_4_2" checked>
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="reference/core/">Core</a>
+          
+            <label for="__nav_4_2">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Core" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Core
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/core/qfuture/" class="md-nav__link">
+        QFuture
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/core/qiodevice/" class="md-nav__link">
+        QIODevice
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/core/qprocess/" class="md-nav__link">
+        QProcess
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/core/qtimer/" class="md-nav__link">
+        QTimer
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -464,18 +750,40 @@
       
       
       
+        
+          
+            
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
       
-        <label class="md-nav__link" for="__nav_4_3">
-          Supported Types
-          <span class="md-nav__icon md-icon"></span>
-        </label>
       
-      <nav class="md-nav" aria-label="Supported Types" data-md-level="2">
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="reference/network/">Network</a>
+          
+            <label for="__nav_4_3">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="Network" data-md-level="2">
         <label class="md-nav__title" for="__nav_4_3">
           <span class="md-nav__icon md-icon"></span>
-          Supported Types
+          Network
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
+          
+            
           
             
               
@@ -483,7 +791,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/qabstractsocket/" class="md-nav__link">
+      <a href="reference/network/qabstractsocket/" class="md-nav__link">
         QAbstractSocket
       </a>
     </li>
@@ -497,63 +805,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/qdbuspendingcall/" class="md-nav__link">
-        QDBusPendingCall
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="reference/qdbuspendingreply/" class="md-nav__link">
-        QDBusPendingReply
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="reference/qfuture/" class="md-nav__link">
-        QFuture
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="reference/qiodevice/" class="md-nav__link">
-        QIODevice
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="reference/qlocalsocket/" class="md-nav__link">
+      <a href="reference/network/qlocalsocket/" class="md-nav__link">
         QLocalSocket
       </a>
     </li>
@@ -567,7 +819,7 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/qnetworkreply/" class="md-nav__link">
+      <a href="reference/network/qnetworkreply/" class="md-nav__link">
         QNetworkReply
       </a>
     </li>
@@ -581,36 +833,87 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/qprocess/" class="md-nav__link">
-        QProcess
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="reference/qtimer/" class="md-nav__link">
-        QTimer
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="reference/qtcpserver/" class="md-nav__link">
+      <a href="reference/network/qtcpserver/" class="md-nav__link">
         QTcpServer
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4" data-md-state="indeterminate" type="checkbox" id="__nav_4_4" checked>
+      
+      
+      
+        
+          
+            
+          
+        
+          
+        
+          
+        
+      
+      
+        
+        
+        <div class="md-nav__link md-nav__link--index ">
+          <a href="reference/dbus/">DBus</a>
+          
+            <label for="__nav_4_4">
+              <span class="md-nav__icon md-icon"></span>
+            </label>
+          
+        </div>
+      
+      <nav class="md-nav" aria-label="DBus" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          DBus
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/dbus/qdbuspendingcall/" class="md-nav__link">
+        QDBusPendingCall
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/dbus/qdbuspendingreply/" class="md-nav__link">
+        QDBusPendingReply
       </a>
     </li>
   
@@ -659,6 +962,10 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" data-md-state="indeterminate" type="checkbox" id="__nav_6" checked>
       
       
+      
+        
+          
+        
       
       
         <label class="md-nav__link" for="__nav_6">
@@ -781,7 +1088,7 @@
                 
 
 <h1 id="qcoro">QCoro</h1>
-<p>C++ Coroutine library for Qt</p>
+<p>C++ Coroutine library for Qt5 and Qt6</p>
 <hr />
 <h2 id="overview">Overview</h2>
 <p>QCoro is a C++ library that provide set of tools to make use of C++20 coroutines
@@ -795,10 +1102,10 @@ in connection with certain asynchronous Qt actions.</p>
 <span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reply</span><span class="o">-&gt;</span><span class="n">readAll</span><span class="p">();</span><span class="w"></span>
 </code></pre></div></p>
 <p>This library has only one class and one function that the user must be aware of: the class is
-<a href="reference/task/"><code>QCoro::Task</code></a> and must be used as a return type for any coroutine that <code>co_await</code>s
-a Qt type. The function is <a href="reference/coro/"><code>qCoro()</code></a> and it provides coroutine-friendly
+<a href="reference/coro/task/"><code>QCoro::Task</code></a> and must be used as a return type for any coroutine that <code>co_await</code>s
+a Qt type. The function is <a href="reference/coro/coro/"><code>qCoro()</code></a> and it provides coroutine-friendly
 wrappers for Qt types that have multiple asynchronous operations that the user may want to <code>co_await</code>
-(for example <a href="reference/qprocess/"><code>QProcess</code></a>). All the other code (basically everything in the
+(for example <a href="reference/core/qprocess/"><code>QProcess</code></a>). All the other code (basically everything in the
 <code>QCoro::detail</code> namespace) is here to provide the cogs and gears for the C++ coroutine machinery,
 making it possible to use Qt types with coroutines.</p>
 <p>The major benefit of using coroutines with Qt types is that it allows writing asynchronous code as if it
@@ -933,7 +1240,7 @@ in <code>CMAKE_CXX_STANDARD</code>:</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.361d90f1.min.js"}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["navigation.expand", "navigation.tracking", "navigation.instant", "navigation.tabs", "navigation.tabs.sticky", "navigation.indexes"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "assets/javascripts/workers/search.361d90f1.min.js"}</script>
     
     
       <script src="assets/javascripts/bundle.289a2a4b.min.js"></script>
