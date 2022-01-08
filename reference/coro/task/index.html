@@ -1071,6 +1071,9 @@ of the <code>co_await</code> call.</p>
 is re-thrown from the <code>co_await</code> call in the awaiting coroutine.</p>
 </div>
 <h2 id="then-continuation"><code>then()</code> continuation</h2>
+<div class="admonition note">
+<p class="admonition-title">This feature is available since QCoro 0.5.0</p>
+</div>
 <p>Sometimes it's not possible to <code>co_await</code> a coroutine, for example when calling a coroutine from a
 reimplementation of a virtual function from a 3rd party library, where we cannot change the signature
 of that function to be a coroutine (e.g. a reimplementation of <code>QAbstractItemModel::data()</code>).</p>
