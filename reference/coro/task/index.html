@@ -553,6 +553,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#then-continuation" class="md-nav__link">
+    then() continuation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#blocking-wait" class="md-nav__link">
     Blocking wait
   </a>
@@ -990,6 +997,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#then-continuation" class="md-nav__link">
+    then() continuation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#blocking-wait" class="md-nav__link">
     Blocking wait
   </a>
@@ -1056,6 +1070,64 @@ of the <code>co_await</code> call.</p>
 <p>When coroutines throws an unhandled exception, the exception is stored in the <code>Task</code> object and
 is re-thrown from the <code>co_await</code> call in the awaiting coroutine.</p>
 </div>
+<h2 id="then-continuation"><code>then()</code> continuation</h2>
+<p>Sometimes it's not possible to <code>co_await</code> a coroutine, for example when calling a coroutine from a
+reimplementation of a virtual function from a 3rd party library, where we cannot change the signature
+of that function to be a coroutine (e.g. a reimplementation of <code>QAbstractItemModel::data()</code>).</p>
+<p>Even in this case, we want to process the result of the coroutine asynchronously, though. For such
+cases, <code>Task&lt;T&gt;</code> provides a <code>then()</code> member function that allows the caller to provide a custom
+callback to be invoked when the coroutine finishes.</p>
+<hr />
+<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">ThenCallback</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">requires</span><span class="w"> </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_void_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invocable</span><span class="o">&lt;</span><span class="n">ThenCallback</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invocable</span><span class="o">&lt;</span><span class="n">ThenCallback</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"></span>
+<span class="n">Task</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">then</span><span class="p">(</span><span class="n">ThenCallback</span><span class="w"> </span><span class="n">callback</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>The <code>Task&lt;T&gt;::then()</code> member function takes a callback, which must be a callable. If <code>T</code> is <code>void</code>, the <code>ThenCallback</code> 
+must be a callable that has no arguments. Otherwise, <code>ThenCallback</code> must have exactly one argument, which is either of
+type <code>T</code> or a type implicitly convertible to <code>T</code>.</p>
+<p>If the return type of the <code>ThenCallback</code> is <code>void</code>, then the return type of the <code>then()</code> functon is <code>Task&lt;void&gt;</code>.
+If the return type of the <code>ThenCallback</code> is <code>R</code> or <code>Task&lt;R&gt;</code>, the return type of the <code>then()</code> function is
+<code>Task&lt;R&gt;</code>. This means that the <code>ThenCallback</code> can be a coroutine as well. Thanks to the return type always being
+of type <code>Task&lt;R&gt;</code>, it is possible to chain multiple <code>.then()</code> calls, or <code>co_await</code> the result of the entire chain.</p>
+<p>If the coroutine throws an exception, the exception is re-thrown when the result of the entire continuation is
+<code>co_await</code>ed. If the result of the continuation is not <code>co_await</code>ed, the exception is silently ignored.</p>
+<p>If an exception is thrown from the <code>ThenCallback</code>, then the exception is either propagated to the next chained
+<code>then()</code> continuation or re-thrown if directly <code>co_await</code>ed. If the result is not <code>co_await</code>ed and no futher
+<code>then()</code> continuation is chained after the one that has thrown, then the exception is silently ignored.</p>
+<hr />
+<div class="highlight"><pre><span></span><code><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">ThenCallback</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">ErrorCallback</span><span class="o">&gt;</span><span class="w"></span>
+<span class="k">requires</span><span class="w"> </span><span class="p">(((</span><span class="n">std</span><span class="o">::</span><span class="n">is_void_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invocable</span><span class="o">&lt;</span><span class="n">ThenCallback</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invocable</span><span class="o">&lt;</span><span class="n">ThenCallback</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span><span class="w"></span>
+<span class="w">            </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">invocable</span><span class="o">&lt;</span><span class="n">ErrorCallback</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="w"> </span><span class="o">&amp;&gt;</span><span class="p">)</span><span class="w"></span>
+<span class="n">Task</span><span class="o">&lt;</span><span class="n">R</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Task</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">then</span><span class="p">(</span><span class="n">ThenCallback</span><span class="w"> </span><span class="n">thenCallback</span><span class="p">,</span><span class="w"> </span><span class="n">ErrorCallback</span><span class="w"> </span><span class="n">errorCallback</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+<p>An overload of the <code>then()</code> member function which takes an additional callback to be invoked when an exception
+is thrown from the coroutine. The <code>ErrorCallback</code> must be a callable that takes exactly one argument, which is
+<code>const std::exception &amp;</code>, holding reference to the exception thrown. An exception thrown from the <code>ErrorCallback</code>
+will be re-thrown if the entire continuation is <code>co_await</code>ed. If another <code>.then()</code> continuation is chained
+after the current continuation and has an <code>ErrorCallback</code>, then the <code>ErrorCallback</code> will be invoked. Otherwise,
+the exception is silently ignored.</p>
+<p>If an exception is thrown by the non-void coroutine and is handled by the <code>ErrorCallback</code>, then if the resulting
+continuation is <code>co_await</code>ed, the result will be a default-constructed instance of type <code>R</code> (since the <code>ThenCallback</code>
+was unable to provide a proper instance of type <code>R</code>). If <code>R</code> is not default-constructible, the program will not
+compile. Thus, if returning a non-default-constructible type from a coroutine that may throw an exception, we
+recommend to wrap the type in <code>std::optional</code>.</p>
+<p>Examples:</p>
+<div class="highlight"><pre><span></span><code><span class="n">QString</span><span class="w"> </span><span class="nf">User::name</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">mName</span><span class="p">.</span><span class="n">isNull</span><span class="p">())</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">mApi</span><span class="p">.</span><span class="n">fetchUserName</span><span class="p">().</span><span class="n">then</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="p">[</span><span class="k">this</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">QString</span><span class="w"> </span><span class="o">&amp;</span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">mName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="p">;</span><span class="w"></span>
+<span class="w">                </span><span class="n">Q_EMIT</span><span class="w"> </span><span class="n">nameChanged</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="p">},</span><span class="w"> </span><span class="p">[](</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="w"> </span><span class="o">&amp;</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">                </span><span class="n">mName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s">&quot;Failed to fetch name: %1&quot;</span><span class="p">).</span><span class="n">arg</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">());</span><span class="w"></span>
+<span class="w">                </span><span class="n">Q_EMIT</span><span class="w"> </span><span class="n">nameChanged</span><span class="p">();</span><span class="w"></span>
+<span class="w">            </span><span class="p">});</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">QStringLiteral</span><span class="p">(</span><span class="s">&quot;Loading...&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">mName</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
 <h2 id="blocking-wait">Blocking wait</h2>
 <p>Sometimes it's necessary to wait for a coroutine in a blocking manner - this is especially useful
 in tests where possibly no event loop is running. QCoro has <code>QCoro::waitFor()</code> function
